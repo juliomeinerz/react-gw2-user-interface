@@ -1,0 +1,29 @@
+#login {
+  margin:0 auto;
+  text-align:center;
+  margin-top:25%;  
+}
+#login input[type='text'] {
+    width:100%;
+    height:50px;
+    line-height:50px;
+    font-size:26px;
+}
+#login-title {
+  font-weight:600;
+  text-align:center;
+  margin-top:70px;
+}
+#login input[type='submit'] {
+  margin:20px;
+  width:20%;
+  height:50px;
+}
+#login-success {
+  text-align:center;
+  color:green;
+}
+#login-failed {
+  text-align:center;
+  color:red;
+}
