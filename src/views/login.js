@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import '../styles/login.css';
 import {browserHistory} from 'react-router';
+import {setKey} from '../storage/api';
 
 const api = 'https://api.guildwars2.com/v2/tokeninfo';
 
@@ -26,7 +27,7 @@ class Login extends Component {
           <input type="submit" onClick={this.handleInputSubmit} value="Log-in" />   
           <div> {this.handleRequestResponse(this.state.status)} </div>       
         </div>
-      </div>    
+      </div>      
     );
   }
   handleInputChange(event) {
@@ -35,7 +36,7 @@ class Login extends Component {
   handleRequestResponse(status) {
     if (status === 0) {
       return <h3 id="login-failed"> Authentication error! </h3>
-    }    
+    } 
   }
   handleInputSubmit() {
     axios.get(api, {
@@ -44,16 +45,20 @@ class Login extends Component {
       }
     })
     .then((response) => {
-      console.log(response)
-      browserHistory.push('/home')
+      if (response.status === 200) {
+        console.log('Status: ' + response.status + ', request successful.');
+      }     
+      setKey(this.state.key);
+      browserHistory.push('/home');
     })
     .catch((error) => {   
-      console.log(error)
-      this.setState({status:0})
+      console.log(error);
+      this.setState({status:0});
     });  
   }  
+  
+  
 }
-
-
-
 export default Login;
+
+
