@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import '../styles/login.css';
 import {browserHistory} from 'react-router';
-import {setKey} from '../storage/api';
+import {setKey} from '../requests/api';
 
 const api = 'https://api.guildwars2.com/v2/tokeninfo';
 
