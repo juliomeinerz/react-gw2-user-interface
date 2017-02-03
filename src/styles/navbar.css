@@ -1,6 +1,18 @@
-#logo-img {
-  height:60px;
-  width:60px;
-  padding:10px;
-  margin-left:20px;
+.navbar {
+  width:100vw;
+  height:50px;
+  background-color:#4E0202;
+  color:white;
+}
+.navbar a {
+  color: white;
+}
+.navbar li a:hover {
+  color:black;
+  background-color:#F1B833;
+}
+.navbar-key {
+  float:right;
+  font-size:12px;
+  padding:17px;
 }

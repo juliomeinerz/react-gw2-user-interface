@@ -1,0 +1,11 @@
+html {
+  height:100%;
+  position:relative;
+}
+body {
+  width:100%;
+  margin:0 auto;
+}
+.container-fluid {
+  padding:0;
+}

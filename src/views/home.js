@@ -1,65 +1,52 @@
 import React, {Component} from 'react';
-import NavigationBar from '../components/navbar';
-import {getKey} from '../requests/api';
 import axios from 'axios';
+import ListItem from '../components/list-item';
 
-const key = getKey();
-const url = "https://api.guildwars2.com/v2/";
-
-
-  
+const url = "https://api.guildwars2.com/v2/account"
 
 export default class Home extends Component {
   constructor() {
-    super();
+    super()
     this.state = {
-      characters: null
+      account: '',
+      wallet: '',
+      pvpstats: '',
+      pvpgames: ''
     }
-    this.getData = this.getData.bind(this);
-    this.buildList = this.buildList.bind(this);
-  }   
-  getData(key,data,state) {
-    axios.get(url + "/" + data, {
+  }
+   getData(key,data,state) {
+    axios.get(url, {
       params: {
         access_token: key
       }
     })
-    .then((response) => {
-      this.setState({[state]:response.data})  
+    .then((response) => {    
+      this.setState({[state]:response.data});
+      
     })
     .catch((error) => {   
-      return 0;      
-    });  
-    
+      console.log(error);     
+    })      
   }
-  componentDidMount() {    
-    this.getData(key,"characters", "characters")    
+  componentDidMount() {
+    this.getData(this.props.accessKey,'', "account");
   }
-  buildList(data) {
-    console.log(data)
-    if(data === null) {
-      return (
-        <li> Loading... </li>         
-      ) 
-    }
-    else {
-      return (
-      <ul>
-        {data.map((a) => {
-          console.log(a)
-          return (
-            <li key={a}> {a} </li>
-          )
-        })}
-      </ul>
-      ) 
-    }
-  }  
-  render() {
+   render() {
     return (
-      <div className="container"> 
-        <NavigationBar apiKey={key} />
-        {this.buildList(this.state.characters)}       
+      <div>
+      <div className="col-md-4"> 
+        <ListItem prefix="Account name" data={this.state.account.name} />
+        <ListItem prefix="Hours played" data={(this.state.account.age) / 3600} />
+        <ListItem prefix="World" data={this.state.account.world} />
+      </div>
+      <div className="col-md-4">
+        <ListItem prefix="Created" data={this.state.account.created} />
+        <ListItem prefix="Account Type" data={this.state.account.access} />
+        <ListItem prefix="Fractal Level" data={this.state.account.fractal_level} />        
+      </div>
+      <div className="col-md-4">
+        <ListItem prefix="WvW Rank" data={this.state.account.wvw_rank} />
+      </div>
       </div>
     )
   }

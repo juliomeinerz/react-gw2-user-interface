@@ -49,7 +49,7 @@ class Login extends Component {
         console.log('Status: ' + response.status + ', request successful.');
       }     
       setKey(this.state.key);
-      browserHistory.push('/home');
+      browserHistory.push('/gw2/');
     })
     .catch((error) => {   
       console.log(error);
