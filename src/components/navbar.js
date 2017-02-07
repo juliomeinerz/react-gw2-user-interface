@@ -18,7 +18,7 @@ export default class NavigationBar extends Component {
             <li> <a href="/gw2/guilds"> Guilds </a> </li>  
                        
           </ul>
-          <p className="navbar-key"> Key: {this.props.accessKey} </p> 
+          <p className="navbar-key"> Key: {this.props.token} </p> 
           </div>            
       </nav>      
     )

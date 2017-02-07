@@ -9,9 +9,9 @@ export default class Main extends Component {
   render() {
     return (
       <div>
-        <NavigationBar accessKey={API} />
+        <NavigationBar token={API} />
         <div className="container-fluid">
-          {React.cloneElement(this.props.children, {accessKey:API})}
+          {React.cloneElement(this.props.children, {token:API})}
         </div>
       </div>
     )

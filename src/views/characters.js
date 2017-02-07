@@ -1,39 +1,51 @@
 import React,{Component} from 'react';
 import List from '../components/list';
 import axios from 'axios';
+import '../styles/characters.css';
 
-const url = "https://api.guildwars2.com/v2/characters";
-
+const charactersURL = "https://api.guildwars2.com/v2/characters";
 
 export default class Characters extends Component {  
   constructor() {
     super();
     this.state = {
-      name: null,
-    }    
+      characters: []
+    }
+    this.getCharactersData = this.getCharactersData.bind(this);
   } 
-  getData(key,state) {
-    axios.get(url, {
+  getCharactersData(key) {
+    axios.get(charactersURL, {
       params: {
         access_token: key
       }
     })
     .then((response) => {      
-      console.log(response)
-      this.setState({[state]:response.data});
-      
-    })
+      response.data.map((character) => {
+        return (
+          axios.get(charactersURL + "/" + character, {
+          params: {
+            access_token: key
+          }
+        })
+        .then((response) => {
+          this.setState({characters: this.state.characters.concat([response.data])})         
+        })
+        .catch((error) => {
+          console.log(error)
+        })        
+      )})     
+    })      
     .catch((error) => {   
       console.log(error);     
     })      
   }
   componentDidMount() {
-    this.getData(this.props.accessKey, "name");
+    this.getCharactersData(this.props.token);
   }
   render() {    
       return (          
-        <div className="col-md-2">     
-          <List data={this.state.name} />        
+        <div>  
+          <List character={this.state.characters} />
         </div>       
       )
   }

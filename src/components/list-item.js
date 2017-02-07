@@ -1,21 +1,26 @@
 import React,{Component} from 'react';
 
 export default class ListItem extends Component {
-  ListItems() {
+  listItems() {
     const props = this.props;
-    if (props) {
+    if (props.data) {
       return (
         <li className="list-group-item">
-          <p> {props.prefix} </p> 
+          <p> <b> {props.prefix} </b> </p> 
           <small> {props.data} </small> 
         </li>
       )
-    }
-    return <small> Loading... </small>
+    } 
+    return (
+      <li className="list-group-item">
+        <p> <b> {props.prefix} </b> </p> 
+        <small> Loading... </small> 
+      </li>
+    )
   }
   render() {
     return (
-      <ul> {this.ListItems()} </ul>
+      <ul> {this.listItems()} </ul>
     )
   }  
 }
